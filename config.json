@@ -1,0 +1,26 @@
+{
+  "serviceURL": "http://geocatminapp.ingemmet.gob.pe/arcgis/rest/services/temp/exportWebMapTask_INGEMMET/GPServer/exportWebMapTask",
+  "defaultTitle": "ArcGIS Web Map",
+  "defaultAuthor": "Web AppBuilder for ArcGIS",
+  "defaultCopyright": "",
+  "defaultFormat": "PDF",
+  "defaultLayout": "A4-Horizontal",
+  "Format": [
+    "PDF",
+    "PNG"
+  ],
+  "Layouts": [
+    {
+      "direccion": "DGAR",
+      "path": "C:\\plantillas_dgar"
+    },
+    {
+      "direccion": "DGR",
+      "path": "C:\\plantillas_dgr"
+    },
+    {
+      "direccion": "DRME",
+      "path": "C:\\plantillas_drme"
+    }
+  ]
+}
