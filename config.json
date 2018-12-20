@@ -2,7 +2,7 @@
   "serviceURL": "http://geocatminapp.ingemmet.gob.pe/arcgis/rest/services/temp/exportWebMapTask_INGEMMET/GPServer/exportWebMapTask",
   "defaultTitle": "ArcGIS Web Map",
   "defaultAuthor": "Web AppBuilder for ArcGIS",
-  "defaultCopyright": "",
+  "defaultCopyright": "INGEMMET",
   "defaultFormat": "PDF",
   "defaultLayout": "A4-Horizontal",
   "Format": [

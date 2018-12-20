@@ -17,7 +17,7 @@ define([
   ) {
     return declare([BaseWidget], {
       baseClass: 'jimu-widget-print',
-      name: 'Print',
+      name: 'INGEMMET_Print',
       className: 'esri.widgets.Print',
       _portalPrintTaskURL: null,
 

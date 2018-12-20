@@ -116,6 +116,7 @@ define([
       this.printTask = new PrintTask(this.printTaskURL, printParams);
       this.printparams = new PrintParameters();
       this.printparams.map = this.map;
+      console.log(this.printparams.map);
       //fix issue #7141
       // this.printparams.outSpatialReference = this.map.spatialReference;
 
@@ -171,10 +172,12 @@ define([
                       this.templateInfos = p.value : false;
                   }));
                   if (this.templateInfos && this.templateInfos.length > 0) {
+                    var temp = this.templateInfos.slice(1, -1);
+                    this.templateInfos = JSON.parse(temp);
                     this.templateNames = array.map(this.templateInfos, function(ti) {
                       return ti.layoutTemplate;
                     });
-                    console.log(this.templateNames);
+                    // console.log(this.templateNames);
                   }
                 }
               } else {
@@ -214,12 +217,14 @@ define([
       }
     },
 
+    // ---------------------------------------------------------------------------
     _hasLabelLayer: function() {
       return array.some(this.map.graphicsLayerIds, function(glid) {
         var l = this.map.getLayer(glid);
         return l && l.declaredClass === 'esri.layers.LabelLayer';
       }, this);
     },
+    // ---------------------------------------------------------------------------
 
     _getPrintTaskInfo: function() {
       // portal own print url: portalname/arcgis/sharing/tools/newPrint
@@ -249,6 +254,7 @@ define([
           })
         );
       }
+      console.log(def);
 
       return def;
     },
@@ -273,7 +279,7 @@ define([
           url: url,
           content: {
             input_folder: "C:\\plantillas_dgar",
-            f: "json"
+            f: "pjson"
           },
           callbackParamName: "callback",
           handleAs: "json",
@@ -293,8 +299,11 @@ define([
     },
 
     _fixInvalidSymbol: function(opLayers) {
+      console.log(opLayers);
+      var notappear = ["graphicsLayer1", "graphicsLayer2", "graphicsLayer3", "graphicsLayer4"];
       array.forEach(opLayers, function(ol) {
         if (ol.id === 'map_graphics') {
+          console.log(ol.id);
           var layers = lang.getObject('featureCollection.layers', false, ol);
           if (layers && layers.length > 0) {
             array.forEach(layers, function(layer) {
@@ -609,8 +618,6 @@ define([
         var template = new PrintTemplate();
         template.format = form.format;
         template.layout = form.layout;
-        // template.format = "PDF";
-        // template.layout = "A4-Horizontal";
         template.preserveScale = (form.preserveScale === 'true' || form.preserveScale === 'force');
         template.label = form.title;
         template.exportOptions = mapOnlyForm;
@@ -653,7 +660,6 @@ define([
         var legendLayers = [];
         if (hasLegend && enabledLegend) {
           var legends = arcgisUtils.getLegendLayers({map: this.map, itemInfo: this.map.itemInfo});
-          console.log(legends);
           legendLayers = array.map(legends, function(legend) {
             return {
               layerId: legend.layer.id
@@ -661,6 +667,7 @@ define([
           });
         }
 
+        console.log(legendLayers);
         return legendLayers;
       } else {
         return (hasLegend && enabledLegend) ? null : [];
