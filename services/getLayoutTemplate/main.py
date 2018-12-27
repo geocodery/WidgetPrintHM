@@ -13,11 +13,15 @@ class GetTemplates(object):
         self.folder = folderTemplate
 
     def GetTemplatesInfo(self):
+        arcpy.AddMessage(self.folder)
         templates = arcpy.GetLayoutTemplatesInfo_server(self.folder)
         j = json.dumps(templates[0])
         j2 = j.replace("activeDataFrameSize", "webMapFrameSize")
-        j3 = json.loads(j2)
-        return j3
+        j2 = j2.replace("\\\\n", "")
+        j2 = j2.replace("\\\\", "")
+        j2 = j2.replace("\\", "")
+        j2 = j2.replace(" ", "")
+        return j2
 
     def process(self):
         templates = self.GetTemplatesInfo()
@@ -28,7 +32,3 @@ class GetTemplates(object):
             pass
         else:
             self.process()
-
-# if __name__ == "__main__":
-#     poo = ConsultaTematica()
-#     poo.main() 
